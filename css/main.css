@@ -1,0 +1,1803 @@
+/* main (custom) style */
+
+
+
+*{
+    margin:0;
+    padding:0;
+}
+
+body{
+    
+    perspective:600px;
+    perspective-origin:50% 50%;
+}
+
+
+
+/* ==================================================== spinner ====================================================  -*/
+
+
+#loader {
+    position: absolute;
+    width: 150px;
+    margin:300px auto;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    
+}
+
+
+#loader .text {
+    position: absolute;
+    top: 40%;
+    left: 25%;
+    color: #999;
+    text-align: center;
+    font-size: 20px;
+}
+
+#page-spinner {
+    height: 150px;
+    width: 150px;
+    border: 3px solid transparent;
+    border-radius: 50%;
+    border-left: 3px solid #62abec;
+    border-right: 3px solid #62abec;
+    animation: loader 2s linear infinite;
+}
+
+#page-spinner:after {
+    content:"";
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    top: 15px;
+    bottom: 15px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+}
+
+#page-spinner:before {
+    content:"";
+    position: absolute;
+    left: 5px;
+    right: 5px;
+    top: 5px;
+    bottom: 5px;        
+    border-radius: 50%;
+    border: 3px solid transparent;
+}
+
+#page-spinner:before {
+  border-top-color: #dc3545;
+  border-bottom-color: #62abec;
+border-left-color: #69cb6a;
+
+  animation: loader 3s linear infinite;
+}
+
+#page-spinner:after {
+  border-top-color:#69cb6a;
+  border-bottom-color:#dc3545;
+  animation: loader 2s linear infinite;
+}
+
+
+@keyframes loader {
+    0%{
+    transform: rotate(0deg);
+    }
+    100%{
+    transform: rotate(360deg);
+    }
+}
+
+
+
+
+
+
+
+
+/* ==================================================== Admin-setting ====================================================  */
+
+
+/* ==================== start Admin-setting ==================== */
+
+.admin-setting{
+    border-bottom:2px solid #BBB;
+    padding:20px;
+
+}
+.admin-setting ul{
+    display:flex;
+    justify-content:flex-start;
+    margin:0;
+    list-style-type:none;
+}
+
+.admin-setting a{
+    text-decoration:none;
+    color:#000;
+    padding:8px 20px;
+    border-radius: 3.3rem;
+    margin-right:20px;
+}
+
+/*buttons*/
+.admin-setting .admin-login{
+    border:2px solid #28a745;
+    transition:all .2s ease-in;
+}
+.admin-setting .admin-logout{
+    border:2px solid #dc3545;
+    transition:all .2s ease-in;
+    display:none;
+}
+
+.admin-setting .admin-edit{
+    border:2px solid #6c757d;
+    transition:all .2s ease-in;
+    display:none;
+}
+.admin-setting .admin-dr-edit{
+    border:2px solid #6c757d;
+    transition:all .2s ease-in;
+    display:none;
+}
+
+.admin-setting .admin-new{
+    border:2px solid #007bff;
+    transition:all .2s ease-in;
+    display:none;
+}
+
+/*buttons hover*/
+.admin-setting .admin-login:hover{
+    background-color:#28a745;
+    color:#FFF;
+}
+.admin-setting .admin-logout:hover{
+    background-color:#dc3545;
+    color:#FFF;
+}
+
+.admin-setting .admin-edit:hover{
+    background-color:#6c757d;
+    color:#FFF;
+}
+.admin-setting .admin-dr-edit:hover{
+    background-color:#6c757d;
+    color:#FFF;
+}
+
+.admin-setting .admin-new:hover{
+    background-color:#007bff;
+    color:#FFF;
+}
+
+/* ==================== start signup.html ====================  */       
+
+
+.signup-form form{
+    width:400px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    padding:15px;
+}
+
+
+.signup-form .form-group-field{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom:1px solid #FFF;
+    padding: 0;
+    margin-bottom:25px;
+    transition:.5ss;
+    position:relative;
+
+}
+
+
+.signup-form .form-group-field::after{
+    content:'';
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:0%;
+    height:2.5px;
+    background-color:#69cb6a;
+    transition: .5s;
+}
+
+.signup-form .form-group-field:focus-within::after{
+    width:100%;
+
+}
+
+
+
+
+
+
+
+
+.signup-form .form-group i{
+    font-size:25px;
+    line-height: 45px;
+    color:#FFF;
+}
+
+.signup-form .form-group-field:focus-within i{
+    animation:bounceIn 1s 1 both;
+}
+
+
+.signup-form .form-group input{
+    height:45px;
+    outline: none;
+    border:none;
+    box-shadow:none !important;
+    font-size:18px;
+    background:none;
+    color: #FFF
+
+}
+
+
+
+.signup-form .form-group-submit{
+    margin-top:5px;
+    padding:0;
+}
+
+
+.signup-form button{
+}
+
+
+
+/* ==================== start edit, edit.html ==================== */
+
+.edit-setting{
+    padding-top:80px;
+
+}
+.edit-setting ul{
+    list-style-type:none;
+}
+.edit-setting ul:first-of-type{
+    transform:translate(0, 40px);
+}
+.edit-setting ul:last-of-type{
+    transform:translate(0, -40px);
+}
+
+
+
+.edit-setting a{
+    text-decoration:none;
+    color:#000;
+/*
+    padding:8px 20px;
+    border-radius: 3.3rem;
+*/
+}
+
+
+
+
+.edit-setting .enter-edit{      /* in edit page */
+    border:2px solid #62abec;
+    width:125px;
+    height:125px;
+    transform: rotate(45deg);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    background-color:#f0f5f8;
+    transition:all .5s ease-out;
+    margin-right: 60px;
+}
+
+.edit-setting .enter-edit span{     /* in edit page */
+    transform:rotate(-45deg)
+}
+
+.edit-setting .enter-edit:hover{   /* in edit page */
+    background-color: #62abec;
+    box-shadow:0 0 0 0.2rem rgba(0,123,255,.25);
+
+
+    
+}
+
+
+/* ==================================================== forms(search) ====================================================  */
+/* ==================================================== forms(search) ====================================================  */
+/* ==================================================== forms(search) ====================================================  */
+/* ==================================================== forms(search) ====================================================  */
+
+
+.search-box {
+    margin-bottom:0px;
+        border-radius:1.25rem;
+
+}
+
+/*---------------------------------------------*/
+
+.search-txt {
+    padding:5px 15px;
+    font-size: 16px;
+    transition: 0.4s;
+    line-height: 40px;
+    width:0px;
+    border:none;
+    border-bottom:0px solid #62abec;
+    outline: none;
+
+}
+ 
+
+.search-box:hover .search-txt {
+    border-bottom:2px solid #62abec;
+    width:240px;
+
+}
+
+/*---------------------------------------------*/
+
+.search-box a{
+    width: 40px;
+    border-radius: 50%;
+/*     background: #2f3640;*/
+    transition: 0.4s;
+    cursor: pointer;
+    text-decoration:none;
+}
+
+.search-box a i {
+    font-size: 30px;
+     color:#62abec;
+}
+
+.search-box:hover a i {
+/*    color:#69cb6a;*/
+}
+
+
+
+/* ==================================================== Home (index.html) ====================================================  */
+
+
+/* ==================== brand ==================== */
+.header-brand{
+    padding:10px 0;
+}
+
+.header-brand a.navbar-brand{
+    position: relative;
+}
+.header-brand a.navbar-brand > span{
+    color:#69cb6a;   
+    font-weight:700;
+    position: absolute;
+    top:55%;
+    left:90%;
+}
+
+
+/*icons*/
+
+.header-brand .phone span.icon{
+    font-size:22px;
+    color:#69cb6a;
+    margin-right:10px;
+}
+.header-brand .phone span.desc{
+    display:inline-block;
+    font-size:15px;
+
+}
+.header-brand .phone .desc a{
+    text-decoration:none;
+    color:#000;
+    
+}
+
+
+/* == brand == */
+
+
+/* ==================== Start Navbar ==================== */
+
+.navbar{
+    background-color:#62abec;
+    padding:0 16px;
+}
+
+.navbar .navbar-nav li.nav-item{
+/*    position: relative;*/
+}
+
+
+.navbar .navbar-nav a.nav-link{
+    
+    color:#000;
+    padding:23px;
+    font-weight:500;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    font-size: 1.2rem;
+    display:flex;
+    align-items:center;
+    position:relative;
+    transition:all .2s ease-in;
+
+}
+
+.navbar .navbar-nav a.nav-link:hover{
+    background-color:#69cb6a !important;
+    color:#FFF;
+}
+
+/*pseudo element */
+.navbar .navbar-nav a.nav-link::before{
+    content:'';
+    position:absolute;
+    bottom:0;
+    left:0;
+    background-color:#000;
+    width:0%;
+    height:4px;
+    transition:all .3s ease-in;
+}
+.navbar .navbar-nav a.nav-link:hover::before{
+    width:100%;
+}
+
+
+
+
+.navbar li i{
+    font-size:1.6rem;
+    margin-right: 8px;
+}
+/* == End Navbar == */
+
+
+
+/* ==================== start slider ==================== */
+.slider{
+    
+
+}
+
+.slider img{
+    height:800px;
+    background-size:cover;
+    
+}
+
+
+.slider .carousel-caption{
+    color:#000;
+    
+    right: 0%;
+    bottom: 50%;
+    left: 5%;
+    z-index: 10;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: left;
+}
+
+.slider .carousel-caption h1{
+    margin-bottom: 20px;
+    font-size: 48px;
+    line-height: 1.3;
+    font-weight: 400;
+
+}
+
+.slider .carousel-caption h1 span{
+    font-weight:700;
+    padding-left:15px;
+}
+
+
+.slider .carousel-caption h3{
+    font-size: 24px;
+    line-height:1.5;
+    font-weight:300px;
+    color:rgba(0, 0, 0, 0.5);
+    margin-bottom: 30px;
+
+
+}
+
+
+
+.carousel-indicators li{
+    
+    background-color:#9bdf46;
+
+}
+/* == End slider == */
+
+/* ==================== start stastic ====================  */
+.stastics{
+    margin-top:100px;
+}
+
+.stastics .col i{
+    color:#62abec;
+}
+.stastics .col:hover i{
+    animation:bounce 1s infinite both;
+}
+
+@keyframes bounce { 
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
+    40% {transform: translateY(-30px);} 
+    60% {transform: translateY(-15px);} 
+} 
+
+
+/*color*/
+.stastics .col i.fa-users{
+    color:#13607c;
+}
+.stastics .col i.fa-hospital-o{
+    color:#ea4486;
+}
+.stastics .col i.fa-user-md{
+    color:#00be8b;
+}
+.stastics .col i.fa-plus-square{
+    color:#e56353;
+}
+/**/
+
+
+
+.stastics .col .number{
+    display:block;
+    font-size:50px;
+    font-weight:bold;
+    color:#828282;
+}
+.stastics .col:hover .number{
+        animation:bounceIn .5s 1 both ease-in;
+
+}
+
+@keyframes bounceIn { 
+    0% { 
+        opacity: 0; 
+        transform: scale(.3); 
+    } 
+
+    50% { 
+        opacity: 1; 
+        transform: scale(1.05); 
+    } 
+
+    70% { 
+        transform: scale(.9); 
+    } 
+
+    100% { 
+        transform: scale(1); 
+    } 
+} 
+
+
+
+
+
+.stastics p{
+    color:#3c97e8;
+    font-size:20px;
+}
+
+/* == End stastic == */
+
+
+
+
+
+/* ==================== start contact-info ====================  */
+
+
+/* === start fieldset ==== */
+
+.contact-info .opening-hours fieldset,
+.contact-info .emergency-info fieldset{
+    border:2px solid #18a3eb;
+    border-radius:20px;
+    font-size:16px;
+    line-height:1.8;
+    padding:25px;
+    margin: 50px 0;
+    height: 300px;
+}
+    
+.contact-info .opening-hours legend,
+.contact-info .emergency-info legend{
+    color:#18a3eb;
+    font-size:24px;
+    font-weight:600;
+    padding:0 12px;
+    margin:0;
+    width:auto;
+}
+
+
+/*opening-hours*/
+.contact-info .opening-hours ul{
+    list-style-type:none;
+    margin:0;
+    font-size:20px;
+    font-weight: 500;
+    color:#828282;
+}
+
+.contact-info .opening-hours li{
+    margin-bottom:16px;
+}
+
+
+/*emergency-info*/
+.contact-info .emergency-info li{
+    font-size:25px;
+    display:flex;
+    justify-content: center;
+    margin-top:20px;
+    margin-bottom:35px;
+}
+
+.contact-info .emergency-info li i{
+    animation:tada 1s infinite both;
+}
+
+
+@keyframes tada { 
+    0% {
+        transform: scale(1);
+    } 
+    10%, 20% {
+        transform: scale(0.9) rotate(-3deg);
+    } 
+    30%, 50%, 70%, 90% {
+        transform: scale(1.2) rotate(3deg);
+    } 
+    40%, 60%, 80% {
+        transform: scale(1.2) rotate(-3deg);
+    } 
+    100% {
+        transform: scale(1) rotate(0);
+    } 
+} 
+
+
+.contact-info .emergency-info li a{
+    text-decoration:none;
+    border:2px solid #28a745;
+    padding:10px 20px;
+    border-radius: 50px;
+    color:#28a745;
+    transition:.5s ease-in-out;
+}
+.contact-info .emergency-info li a:hover{
+    background-color:#28a745;
+    color:#FFF;
+}
+
+
+.contact-info .emergency-info p{ 
+    padding:0 20px;
+    margin: 0;
+    font-size:20px;
+    font-weight: 500;
+    color:#828282;
+
+
+}
+
+
+/* == End contact-info == */
+
+
+
+/* ==================== start services ==================== */
+
+.services-article {
+    margin-top:100px;
+    padding-top:80px;
+    padding-bottom:80px;
+    background-color:#f0f5f8;
+
+}
+
+/*services-heading*/
+.services-article .services-heading{
+    margin-bottom:40px;
+    
+}
+.services-article .services-heading h2{
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom:25px;
+}
+.services-article .services-heading p{
+    margin-bottom:50px;
+    font-size:20px;
+    font-weight: 500;
+    color:#828282;
+    line-height:1.8;
+}
+/**/
+
+/*services*/
+.services-article .services{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+    overflow: hidden;
+    
+    padding: 1.5em;
+    padding-top: 2.5em;
+    border: 1px solid #b1bed5 !important;
+    line-height: 1.7;
+    color:#666666;
+    text-decoration:none;
+    cursor:pointer;
+    border-radius:8px;
+    transition:.5s;
+    position: relative;
+    box-shadow: 5px -5px 0px 0px #b1bed5,
+                10px -10px 0px 0px #c8e6f5,
+                15px -15px 0px 0px #b2d3be,
+                20px -20px 0px 0px #e5ebf1;
+}
+
+.services-article .services:hover{
+    box-shadow: 5px -5px 0px 0px #c8e6f5,
+                10px -10px 0px 0px #b2d3be,
+                15px -15px 0px 0px #e5ebf1;
+    transform: scale(1.06,1.06) translateZ(10px);
+}
+
+.services-article .services span:first-child{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom:10px;
+    width:120px;
+    height:120px;
+    border-radius: 50%;
+}
+
+.services-article .services i{
+    color:#FFF;
+    font-size:5em;
+/*    transition: 1.5s;*/
+}
+
+.services-article .services:hover i{
+/*    transform: rotate(360deg);*/
+    animation:pulse .5s infinite both;
+}
+
+@keyframes pulse { 
+    0% { transform: scale(1); } 
+    50% { transform: scale(1.2); } 
+    100% { transform: scale(1); } 
+} 
+
+
+/*bordering*/
+
+.services-article .services span.bordering{
+    position: absolute;
+    background-color:#b1bed5;
+    transition:.5s;
+}
+.services-article .services span.bordering-1{
+    top:0;
+    left:0;
+    width:5px;
+    height:0%;
+    
+}
+.services-article .services span.bordering-2{
+    left:0;
+    bottom:0;
+    width:0%;
+    height:5px;    
+}
+.services-article .services span.bordering-3{
+    bottom:0;
+    right: 0;
+    width:5px;
+    height:0%;
+}
+.services-article .services span.bordering-4{
+    top:0;
+    right:0;
+    width:0%;
+    height:5px;
+}
+
+.services-article .services:hover span.bordering-1,
+.services-article .services:hover span.bordering-3{
+    height: 100%;
+}
+.services-article .services:hover span.bordering-2,
+.services-article .services:hover span.bordering-4{
+    width:100%;
+}
+
+
+
+
+
+/*icon color*/
+.services-article .services span.icon1{
+    background-color:#00be8b;
+}
+.services-article .services span.icon2{
+    background-color:#3777a4cf;
+}
+.services-article .services span.icon3{
+    background-color:#f1894d;
+}
+.services-article .services span.icon4{
+    background-color:#e56353;
+}
+.services-article .services span.icon5{
+    background-color:#b83048;
+}
+.services-article .services span.icon6{
+    background-color:#f3b546;
+}
+/**/
+
+/*h4,p*/
+.services-article h4 a{
+    color:#000;
+    text-decoration:none;
+}
+
+.services-article .services:hover h4{
+    animation:none .5s 1 both ease-in; 
+}
+
+
+.services-article .services p{
+    padding-top:10px;
+    font-size:20px;
+    color:#828282;
+    
+}
+/**/
+
+
+/* == End services == */
+
+
+
+/* ==================== start collapse ====================  */
+
+.about-healthycare{
+    margin-top:100px;
+    overflow:hidden;
+}
+
+.about-healthycare .hellthycare-info h2,
+.about-healthycare .hellthycare-info p{
+    margin-bottom: 20px
+}
+
+.about-healthycare .hellthycare-info p{
+    
+    margin-bottom:50px;
+    font-size:20px;
+    color:#000;
+    line-height:1.8;
+}
+
+
+.about-healthycare .card .card-header{
+    padding:3px;
+    background-color:#62abec;
+}
+
+.about-healthycare .card h2 button{
+    
+    text-decoration: none;
+    color:#000;
+    font-weight:500;
+    font-size:20px;
+}
+.about-healthycare .card i{
+    font-size:25px;
+    padding-right:10px;
+
+}
+
+.about-healthycare .card .card-header:hover i{
+        animation:hand-shake 1.5s 2 both;
+}
+
+
+@keyframes hand-shake { 
+    0%, 100% {
+        transform: translateX(0);
+    } 
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-5px);
+    } 
+    20%, 40%, 60%, 80% {
+        transform: translateX(5px);
+    } 
+} 
+
+
+
+
+
+.about-healthycare .accordion{
+    padding-top:50px;
+    padding-bottom: 50px;
+    
+}
+.about-healthycare .card  .card-body{
+    font-size:20px;
+    font-weight:400;
+    line-height:1.7;
+    color:#666666;
+    line-height:1.8;
+
+}
+.about-healthycare .card  ul{
+    padding-left:60px;
+    padding-top:20px;
+    
+}
+/* == End collapse == */
+
+/* ==================== start doctors-care ====================  */
+
+.doctors-care {
+    
+    margin-top:100px;
+    background-color:#f0f5f8;
+}
+.doctors-care .left-care{
+    padding:100px 0;
+
+}
+.doctors-care  .left-care h2{
+    font-weight:700;
+    font-size:30px;
+    margin-bottom:50px;
+
+}
+.doctors-care .left-care a{
+    text-decoration:none;
+    border:none;
+    font-size:1.25rem;
+    padding: 12px 20px;
+    background-color: #007bff;
+    color:#FFF;
+    border-radius: 3.3rem;
+    position: relative;
+    transition:all .4s ease-in;
+
+}
+
+.doctors-care .left-care a:hover{
+    background-color:#69cb6a;
+    box-shadow: 0 0 2px 2px #ccc;
+}
+
+.doctors-care .left-care a:hover i{
+    animation:pulse .5s infinite both;
+}
+
+
+
+.doctors-care .left-care a i{
+    padding-right:10px;
+    transition: all .4s linear;
+}
+
+.doctors-care .right-care{
+    margin-top:16px;
+}
+/* == End doctors-care == */
+
+
+
+/* ==================== start depts ====================  */
+
+.depts{
+    margin-top:150px;
+}
+
+.depts .col{
+    display: flex;
+    justify-content: center;
+}
+.depts .row:last-of-type{
+        padding-top: 100px;
+
+}
+
+
+
+.depts .section{
+    border-radius:50%;
+    height:250px;
+    margin-bottom:20px;
+
+}
+
+.depts .section img{
+    width:250px;
+    height:100%;
+    border-radius:50%;
+    position: relative;
+    z-index: 2;
+    box-shadow:0 0 8px #666;
+    transition: all 0.35s ease-in-out;
+    background-color: #f0f5f8;
+}
+.depts .section .overlay{
+    width:250px;
+    height:100%;
+    border-radius:50%;
+    position: relative;
+    background-color: #62abec;
+    color:#000;
+    top:-100%;
+    left: 0;
+    z-index:1;
+    /*in*/
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.depts .section:hover img{
+    transform-origin: 95% 40%; 
+    transform: rotate(-120deg);
+}
+
+.depts .section .overlay h4{
+    padding-bottom:30px;
+    margin-bottom: 20px;
+    border-bottom:1px solid #f0f5f8;
+}
+
+.depts .section .overlay h5 a{
+    text-decoration:none;
+    color:#f0f5f8;
+}
+
+
+/* ==================== start testimonials ====================  */
+
+
+.testimonials{
+    margin-top:150px;
+    background-color:#f0f5f8;
+    padding:80px 50px 150px;
+}
+.testimonials h1{
+    margin-bottom: 80px;
+}
+
+    
+.testimonials .carousel-item img{
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    margin-right:40px !important;
+}
+
+.testimonials .carousel-item h5{
+    margin-bottom: 25px;
+    color: #666666;
+}
+.testimonials .carousel-item p{
+    font-weight:400;
+    font-size:18.5px;
+    line-height:1.7;
+    color:#828282;
+}
+
+/*== stars-eval ==*/
+
+.testimonials .carousel-item .stars-eval i{
+    color:#FFBC2C;
+}
+
+
+/*== prev, next ==*/
+.testimonials .carousel-control-prev,
+.testimonials .carousel-control-next {
+    background-color:#b5cad6;
+    width:50px;
+    height:50px;
+}
+
+.testimonials .carousel-control-prev{
+    position:absolute;
+    top:110%;
+    left: 40%;
+
+}
+
+.testimonials .carousel-control-next{
+    position:absolute;
+    top:110%;
+    right:40%;
+}
+
+
+
+/* == End testimonials == */
+
+
+
+
+
+
+
+/* ==================== start team-show ====================  */
+.team-show{
+    margin-top:150px;
+    overflow:hidden;
+}
+.team-show img{
+    margin:0 auto;
+    background-size: cover;
+}
+
+
+/* == End show == */
+
+
+/* ==================== start footer ====================  */
+
+footer{
+    background-color: #282e34;
+    color:#FFF;
+    padding:50px;
+}
+
+/* ===== footer-info ===== */
+footer .footer-info h2,
+footer .footer-contact h2,
+footer .footer-form h2{
+    padding-bottom: 40px;
+    margin:0;    
+}
+
+footer .footer-info a{
+    text-decoration: none;
+}
+
+footer .footer-info a span{
+    font-weight:700;
+    text-transform:uppercase;
+}
+
+footer .footer-info a span:first-child{
+    color:#62abec;  
+}
+
+footer .footer-info a span:last-child{
+    color:#69cb6a;
+    
+}
+
+footer .footer-info p{
+    font-size:20px;
+    line-height: 40px;
+}
+
+
+/* ===== footer-contact ===== */
+
+footer .footer-contact .contact-desc{
+    line-height:50px;
+    font-size: 20px;
+}
+footer .footer-contact .contact-desc i{
+    font-size: 25px;
+    margin-right:10px;
+}
+footer .footer-contact .contact-desc a{
+    text-decoration:none;
+    color:#FFF;
+}
+/* ===== footer-form ===== */
+footer .footer-form form input,
+footer .footer-form form textarea{
+    background-color: rgba(0, 0, 0, 0.15);
+    border:none;
+    padding:10px 20px;
+    color:#CCC;
+}
+
+footer .footer-form form input{
+    height:45px;
+}
+
+footer .footer-form form button{
+    display:block;
+    margin:0 auto;
+}
+
+
+@media (max-width:576px) {
+    
+    .footer-info, .footer-contact{
+        margin-bottom:30px;
+    }
+    
+    
+}
+
+
+
+/* == End footer == */
+
+
+/* ==================== start copyright ====================  */
+ .copyright{
+    background-color:rgb(34, 39, 44);
+     padding:25px 50px;
+     color:#FFF;
+}
+
+.copyright i{
+    color:#FFF;
+    margin-right:15px;
+    transition: all .5s linear;
+}
+.copyright i:hover{
+    transform:rotate(360deg);
+}
+.copyright .youtube i:hover{
+   color:#ff0000;
+}
+.copyright .facebook i:hover{
+    color:#4267b2;
+}
+.copyright .twitter i:hover{
+    color:#1da1f2;
+}
+
+
+@media (max-width:576px) {
+    
+    .copyright .social-web{
+        margin-top:20px;
+    }
+    
+    
+}
+
+
+/* == End copyright == */
+
+
+
+
+/* ==================================================== contact.html ====================================================  */
+
+
+/* ==================== start contact-slider ====================  */       
+
+.contact-slider{
+    width:100%;
+    height:400px;
+    background-image:url(../images/cover/44contact.png);
+    background-size: cover;
+    opacity:.9;
+    margin-bottom:150px;
+
+}
+
+.contact-slider h1{
+    margin-top:150px;
+    font-weight: 300;
+    font-size: 48px;
+}
+.contact-slider h1 span{
+    font-weight:500;
+    color:#3c97e8;
+}
+.contact-slider h3{
+    font-size: 24px;
+    line-height:1.5;
+    font-weight:300px;
+    color:rgba(0, 0, 0, 0.5);
+}
+
+/* ==================== start contact-info ====================  */       
+
+
+.contact-info{
+}
+.contact-info h2{
+    padding-bottom:30px;
+    margin:0;
+}
+.contact-info .contact-info-icons i{
+    font-size:25px;
+    color:#3c97e8;
+    
+}
+.contact-info .contact-info-icons span{
+    font-size: 20px;
+}
+
+.contact-info .contact-info-icons li{
+    list-style-type:none;
+    display: inline-block;
+    padding-right:60px;
+}
+
+
+
+/* ==================== start form-info ====================  */       
+
+.form-info{
+    margin-top:50px;
+}
+
+.form-info input{
+    height:45px;
+}
+
+.form-info button{
+/*
+    display:block;
+    margin:30px auto;
+*/
+}
+
+
+
+
+/* ==================================================== doctors.html ====================================================  */
+
+
+/* ==================== start doctors-slider ====================  */       
+
+.doctors-slider{
+    width:100%;
+    height:400px;
+    background-image:url(../images/cover/banner1.jpg);
+    background-size: cover;
+    opacity:.9;
+    margin-bottom:150px;
+
+}
+.doctors-slider h1{
+    margin-top:150px;
+    font-weight: 300;
+    font-size: 48px;
+
+}
+.doctors-slider h1 span{
+    font-weight:500;
+    color:#3c97e8;
+}
+
+
+.doctors-slider h3{
+    font-size: 24px;
+    line-height:1.5;
+    font-weight:300px;
+    color:rgba(0, 0, 0, 0.5);
+}
+
+
+/* ==================== start doctors-cv ====================  */       
+.doctors-cv{
+    
+}
+
+
+
+.doctors-cv h2{
+    margin-bottom: 20px;
+    line-height: 1.5;
+    font-weight: 700;
+    
+}
+
+.doctors-cv p{
+    font-size:18px;
+    line-height:1.8;
+    font-size: 20px;
+    font-weight: 500;
+    color: #828282;
+}
+
+.doctors-cv-row{
+    margin-top:100px;
+}
+/*----------------------------------------*/
+.doctors-cv-row .image{
+    border-radius: 10%;
+/*    position: relative;*/
+    width:100%;
+    height:260px;
+    overflow:hidden;
+    box-shadow:0 0 8px #666;
+}
+
+
+.doctors-cv-row .image img{
+    border-radius:inherit;
+    width:100%;
+    height:100%;
+    transition:all .3s linear;
+    position: relative;
+    z-index: 2;
+
+    
+}
+.doctors-cv-row .image .overlay{
+    border-radius:inherit;
+    width:100%;
+    height:100%;
+    /*overlay*/
+    position: relative;
+/*    top:0%;*/
+    top:-100%;
+    left:0%;
+    background-color: #000000ba;
+/*    opacity:.7;*/
+/*    visibility: hidden;*/
+    /*overlay-in*/
+    transition:all .5s linear;
+    z-index: 1;
+    
+    color:#FFF;
+}
+
+
+.doctors-cv-row .image:hover {
+    box-shadow:7px 7px 20px #ccc,
+                -7px -7px 20px #ccc;
+}
+
+.doctors-cv-row .image:hover img{
+    transform: scale(1.5);
+}
+
+.doctors-cv-row .image:hover .overlay{
+/*    visibility: visible;*/
+    z-index: 3;
+}
+
+
+/*---------------------------------------*/
+
+.doctors-cv-row .image .overlay h5{
+    position: absolute;
+    top:-100%;
+    left:0%;
+    padding:10px 0;
+    width:100%;
+    background-color:#69cb6ad1;
+    border-top:1px solid #FFF;
+    border-bottom:1px solid #FFF;
+    transition:all .4s ease;
+
+}
+.doctors-cv-row .image:hover .overlay h5{
+    top:15%;
+}
+
+.doctors-cv-row .image .overlay h6{
+    position: absolute;
+    top:50%;
+    left:-100%;
+    padding:10px 5px;
+    border-top:2px solid #FFF;
+    border-bottom:2px solid #FFF;
+    transition:all .5s ease-in;
+}
+
+.doctors-cv-row .image:hover .overlay h6{
+    left:25%;
+}
+
+
+/*----------------------------------------*/
+
+.doctors-cv-row h3{
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    padding-top:25px;
+    
+}
+.doctors-cv-row h3 a{
+    text-decoration:none;
+    color:#000;
+    text-align: center;
+}
+
+.doctors-cv-row .doctors-socialmedia{
+    text-align: center;
+    padding-top:10px;
+}
+
+
+.doctors-cv-row .doctors-socialmedia a{
+    margin-right:5px;
+    text-decoration: none;
+    font-size:22px;
+    border:1px solid #000;
+    width:40px;
+    height:40px;
+    display:inline-flex;
+    justify-content: center;
+    align-items: center;
+    position:relative;
+    overflow: hidden;
+    transition:.5s;
+}
+
+
+
+.doctors-cv-row .doctors-socialmedia a.facebook{
+    color:#4267b2;
+}
+.doctors-cv-row .doctors-socialmedia a.twitter{
+    color:#1da1f2;
+}
+.doctors-cv-row .doctors-socialmedia a.linkedin{
+    color:#069;
+}
+.doctors-cv-row .doctors-socialmedia a.instagram{
+    color:#e6365d;
+}
+
+.doctors-cv-row .doctors-socialmedia a::after{
+    content:'';
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    width:0%;
+    height:0%;
+    z-index:-1;
+    transition:all .3s;
+}
+
+
+.doctors-cv-row .doctors-socialmedia a.facebook::after{
+    background-color:#4267b2;
+    color:#FFF;
+}
+.doctors-cv-row .doctors-socialmedia a.twitter::after{
+    background-color:#1da1f2;
+    color:#FFF;
+}
+.doctors-cv-row .doctors-socialmedia a.linkedin::after{
+    background-color:#069;
+    color:#FFF;
+}
+.doctors-cv-row .doctors-socialmedia a.instagram::after{
+    background-color:#e6365d;
+    color:#FFF;
+}
+
+
+
+.doctors-cv-row .doctors-socialmedia a:hover:after{
+    width:100%;
+    height:100%;    
+}
+
+.doctors-cv-row .doctors-socialmedia a:hover{
+    color:#FFF;
+}
+
+
+/* ==================================================== services.html ====================================================  */
+
+/* ==================== start services-slider ====================  */       
+
+.services-slider{
+    width:100%;
+    height:400px;
+    background-image:url(../images/cover/ourdoctors.png);
+    background-size: cover;
+    opacity:.9;
+    margin-bottom:150px;
+
+}
+
+.services-slider h1{
+    margin-top:150px;
+    font-weight: 300;
+    font-size: 48px;
+}
+.services-slider h1 span{
+    font-weight:500;
+    color:#3c97e8;
+}
+.services-slider h3{
+    font-size: 24px;
+    line-height:1.5;
+    font-weight:300px;
+    color:rgba(0, 0, 0, 0.5);
+}
+
+
+
+
+
+
+
+
+
+/* ================================================ department.html (all) ================================================  */
+
+
+/* ==================== start department-slider ====================  */       
+
+.department-slider{
+    width:100%;
+    height:400px;
+    background-image:url(../images/cover/surgery2.jpg);
+    background-size: cover;
+    opacity:.9;
+    margin-bottom:150px;
+
+}
+
+.department-slider h1{
+    margin-top:150px;
+    font-weight: 300;
+    font-size: 48px;
+}
+.department-slider h1 span{
+    font-weight:500;
+    color:#3c97e8;
+
+}
+.department-slider h3{
+    font-size: 24px;
+    line-height:1.5;
+    font-weight:300px;
+    color:rgba(0, 0, 0, 0.5);
+}
+
+/* ==================== start department-info ====================  */    /* All dept */   
+.department-info{
+    margin-bottom:120px;
+}
+
+
+/* ==================== start department-plans ====================  */    /* All dept */   
+
+.department-plans{
+    margin-bottom:120px;
+}
+
+.department-plans h2{
+    margin-bottom: 20px;
+    line-height: 1.5;
+    font-weight: 700;
+}
+
+.department-plans p{
+    margin-bottom: 20px;
+    line-height:1.8;
+    font-size: 20px;
+    font-weight: 500;
+    color: #828282;
+}
+
+
+
+.department-plans ul{
+    margin-top:80px;
+}
+
+
+.department-plans ul li{
+    list-style-type:none;
+    font-size: 20px;
+    font-weight:450;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    background-color: #fafafa;
+    border:1px solid #f0f5f8;
+    display:block;
+}
+
+.department-plans ul li span:first-child{
+    width:85%;
+    display:inline-block;
+}
+
+.department-plans ul li span:last-child{
+    width:15%;
+    display:inline-block;
+    text-align:right;
+    color:#3c97e8;
+}
+
+.department-plans ul li:hover,
+.department-plans ul li:hover span{
+    background-color:#69cb6a;
+    color:#FFF;
+}
+
+
+
+/* ================================================ iframe (all) ================================================  */
+
+
+iframe{
+    
+    margin-top:100px;
+    border:none;
+    
+}
+
+
+
+
+/* forms in the iframe */
+
+input[name="BeforeUpdate"],
+select[name="Update"]{
+
+    box-shadow:0 0 0 0.1rem rgb(255, 193, 7);
+    border:none;
+
+}
+
+
+
+
+.rel button{
+    margin:50px 20px 0 20px;
+}
+
+
+
+
+
+
+
+
+
+

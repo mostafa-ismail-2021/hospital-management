@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <meta charset="UTF-8"/>
+        <meta name="description" content="Welcome to Healthycare site"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+        <title>Healthy care</title>
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+        
+        
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <link rel="stylesheet" href="css/font-awesome.min.css" />
+        <link rel="stylesheet" href="css/animate.css"/>
+        <link rel="stylesheet" href="css/main.css" />
+        <?php
+            @$RoomSend = $_POST["RoomSend"];
+            @$RoomShow = $_POST["RoomShow"];
+            @$RoomDelete = $_POST["RoomDelete"];
+            @$RoomSelect = $_POST["RoomSelect"];
+            @$RoomUpdate = $_POST["RoomUpdate"];
+            if(isset($RoomSend)){
+                $RoomName = $_POST["Room_Name"];
+                $RoomPlace = $_POST["Room_Place"];
+                $RoomType = $_POST["Room_Type"];
+                $Repeat = CheckRepeat($RoomName,$RoomPlace,$RoomType);
+                if($Repeat == true){
+                    if($RoomName != "" && $RoomPlace != "" && $RoomType != ""){
+                        @$con = mysql_connect("localhost","root","")or die("error in connect to server");
+                        $db = mysql_select_db("project")or die("error to connect to database");
+                        $q = mysql_query("insert into room(room_name,room_place,room_type) values ('$RoomName','$RoomPlace','$RoomType')");
+                        $id = GetId($RoomName,$RoomPlace,$RoomType);
+                        mysql_close($con);
+                        echo "<script type='text/javascript'>alert('data added successfuly and the id is $id');</script>";
+                    }
+                    else{echo "<script type='text/javascript'>alert('error in input data');</script>";}
+                }
+                else
+                    echo "<script type='text/javascript'>alert('error data repeat');</script>";
+                
+            }
+            elseif(isset($RoomDelete)){
+                $RoomName = $_POST["Room_Name"];
+                $RoomPlace = $_POST["Room_Place"];
+                $RoomType = $_POST["Room_Type"];
+                if($RoomName == "" && $RoomPlace == "" && $RoomType == "")
+                    echo "<script type='text/javascript'>alert('error you must full at least one input');</script>";
+                elseif($RoomName != "" && $RoomPlace == "" && $RoomType == ""){
+                    @$con = mysql_connect("localhost","root","")or die("error in connect to server");
+                    $db = mysql_select_db("project")or die("error to connect to database");
+                    $q = mysql_query("delete from room where room_name = '$RoomName'");
+                    mysql_close($con);
+                    echo "<script type='text/javascript'>alert('data deleted successfuly');</script>";
+                }
+                elseif($RoomName == "" && $RoomPlace != "" && $RoomType == ""){
+                    @$con = mysql_connect("localhost","root","")or die("error in connect to server");
+                    $db = mysql_select_db("project")or die("error to connect to database");
+                    $q = mysql_query("delete from room where room_place = '$RoomPlace'");
+                    mysql_close($con);
+                    echo "<script type='text/javascript'>alert('data deleted successfuly');</script>";
+                }
+                elseif($RoomName == "" && $RoomPlace == "" && $RoomType != ""){
+                    @$con = mysql_connect("localhost","root","")or die("error in connect to server");
+                    $db = mysql_select_db("project")or die("error to connect to database");
+                    $q = mysql_query("delete from room where room_type = '$RoomType'");
+                    mysql_close($con);
+                    echo "<script type='text/javascript'>alert('data deleted successfuly');</script>";
+                }
+                elseif($RoomName != "" && $RoomPlace != "" && $RoomType == ""){
+                    @$con = mysql_connect("localhost","root","")or die("error in connect to server");
+                    $db = mysql_select_db("project")or die("error to connect to database");
+                    $q = mysql_query("delete from room where room_name = '$RoomName' and room_place = '$RoomPlace'");
+                    mysql_close($con);
+                    echo "<script type='text/javascript'>alert('data deleted successfuly');</script>";
+                }
+                elseif($RoomName != "" && $RoomPlace == "" && $RoomType != ""){
+                    @$con = mysql_connect("localhost","root","")or die("error in connect to server");
+                    $db = mysql_select_db("project")or die("error to connect to database");
+                    $q = mysql_query("delete from room where room_name = '$RoomName' and 
+                    room_type = '$RoomType'");
+                    mysql_close($con);
+                    echo "<script type='text/javascript'>alert('data deleted successfuly');</script>";
+                }
+                elseif($RoomName == "" && $RoomPlace != "" && $RoomType != ""){
+                    @$con = mysql_connect("localhost","root","")or die("error in connect to server");
+                    $db = mysql_select_db("project")or die("error to connect to database");
+                    $q = mysql_query("delete from room where room_place = '$RoomPlace' and 
+                    room_type = '$RoomType'");
+                    mysql_close($con);
+                    echo "<script type='text/javascript'>alert('data deleted successfuly');</script>";
+                }
+                elseif($RoomName != "" && $RoomPlace != "" && $RoomType != ""){
+                    @$con = mysql_connect("localhost","root","")or die("error in connect to server");
+                    $db = mysql_select_db("project")or die("error to connect to database");
+                    $q = mysql_query("delete from room where room_name = '$RoomName' and room_place = '$RoomPlace' 
+                    and room_type = '$RoomType'");
+                    mysql_close($con);
+                    echo "<script type='text/javascript'>alert('data deleted successfuly');</script>";
+                }
+            }
+            elseif(isset($RoomUpdate)){
+                $RoomName = $_POST["Room_Name"];
+                $RoomPlace = $_POST["Room_Place"];
+                $RoomType = $_POST["Room_Type"];
+                $Update = $_POST["Update"];
+                if($Update == "RoomName"){
+                    if($RoomName == "" || $RoomPlace == "" && $RoomType == "")
+                        echo "<script type='text/javascript'>alert('error you must add a vlaue to the name field and one field at least of other');</script>";
+                    else{
+                        @$con = mysql_connect("localhost","root","")or die("error in connect to server");
+                        $db = mysql_select_db("project")or die("error to connect to database");
+                        if($RoomPlace != "" && $RoomType == ""){
+                            $q = mysql_query("UPDATE room set room_name = '$RoomName' where
+                            room_place = '$RoomPlace'");
+                        }
+                        elseif($RoomPlace == "" && $RoomType != ""){
+                            $q = mysql_query("UPDATE room set room_name = '$RoomName' where
+                            room_type = '$RoomType'");
+                        }
+                        elseif($RoomPlace != "" && $RoomType != ""){
+                            $q = mysql_query("UPDATE room set room_name = '$RoomName' where
+                            room_place = '$RoomPlace' and room_type = '$RoomType'");
+                        }
+                        mysql_close($con);
+                    }
+                        
+                        
+                }
+                elseif($Update == "RoomPlace"){
+                    if($RoomPlace == "" || $RoomName == "" && $RoomType == "")
+                        echo "<script type='text/javascript'>alert('error you must add a vlaue to the Place field and one field at least of other');</script>";
+                    else{
+                        @$con = mysql_connect("localhost","root","")or die("error in connect to server");
+                        $db = mysql_select_db("project")or die("error to connect to database");
+                        if($RoomName != "" && $RoomType == ""){
+                            $q = mysql_query("UPDATE room set room_place = '$RoomPlace' where
+                            room_name = '$RoomName'");
+                        }
+                        elseif($RoomName == "" && $RoomType != ""){
+                            $q = mysql_query("UPDATE room set room_place = '$RoomPlace' where
+                            room_type = '$RoomType'");
+                        }
+                        elseif($RoomName != "" && $RoomType != ""){
+                            $q = mysql_query("UPDATE room set room_place = '$RoomPlace' where
+                            room_name = '$RoomName' and room_type = '$RoomType'");
+                        }
+                        mysql_close($con);
+                    }
+                }
+                elseif($Update == "RoomType"){
+                    if($RoomType == "" || $RoomName == "" && $RoomPlace == "")
+                        echo "<script type='text/javascript'>alert('error you must add a vlaue to the Type field and one field at least of other');</script>";
+                    else{
+                        @$con = mysql_connect("localhost","root","")or die("error in connect to server");
+                        $db = mysql_select_db("project")or die("error to connect to database");
+                        if($RoomName != "" && $RoomPlace == ""){
+                            $q = mysql_query("UPDATE room set room_type = '$RoomType' where
+                            room_name = '$RoomName'");
+                        }
+                        elseif($RoomName == "" && $RoomPlace != ""){
+                            $q = mysql_query("UPDATE room set room_type = '$RoomType' where
+                            room_place = '$RoomPlace'");
+                        }
+                        elseif($RoomName != "" && $RoomPlace != ""){
+                            $q = mysql_query("UPDATE room set room_type = '$RoomType' where
+                            room_name = '$RoomName' and room_place = '$RoomPlace'");
+                        }
+                        mysql_close($con);
+                    }   
+                }
+            }
+            function show(){
+                @$con = mysql_connect("localhost","root","")or die("error in connect to server");
+                $db = mysql_select_db("project")or die("error to connect to database");
+                $q = mysql_query("select * from room");
+                $n = mysql_num_rows($q);
+                
+                if($n == 0)
+                    echo "<script type='text/javascript'>alert('sorry no record in this table');</script>";
+                else{
+                    echo"<div style='overflow-y:auto; height:300px'>";
+                    echo"<table style='border: 2px solid #ddd; border-collapse: collapse; width:100px; height:100px;
+                    margin-left:35%'>";
+                    echo"<tr>";
+                    echo"<th style='border: 2px solid #ddd; padding:5px'>patient_id</th>";
+                    echo"<th style='border: 2px solid #ddd; padding:5px'>patient_name</th>";
+                    echo"<th style='border: 2px solid #ddd; padding:5px'>patient_phone</th>";
+                    echo"<th style='border: 2px solid #ddd; padding:5px'>patient_address</th>";
+                    echo"</tr>";
+                    
+                    
+                    for($i=0;$i<$n;$i++){
+                        $id = mysql_result($q,$i,"room_id");
+                        $name = mysql_result($q,$i,"room_name");
+                        $place = mysql_result($q,$i,"room_place");
+                        $type = mysql_result($q,$i,"room_type");
+                        echo"<tr> <td style='border: 2px solid #ddd; padding:10px'>$id</td> <td style='border: 2px solid #ddd; padding:10px'>$name</td> <td style='border: 2px solid #ddd; padding:10px'>$place</td> <td style='border: 2px solid #ddd; padding:10px'>$type</td> </tr>";
+                    }
+                    
+                    echo"</table>";
+                    echo"</div>";
+                }
+                
+                mysql_close($con);
+                }
+            function select(){
+                $RoomName = $_POST["Room_Name"];
+                $RoomPlace = $_POST["Room_Place"];
+                $RoomType = $_POST["Room_Type"];
+                if($RoomName == "" && $RoomPlace == "" && $RoomType == "")
+                    echo "<script type='text/javascript'>alert('error you must full at least one input');</script>";
+                else{
+                    @$con = mysql_connect("localhost","root","")or die("error in connect to server");
+                    $db = mysql_select_db("project")or die("error to connect to database");
+                    if($RoomName != "" && $RoomPlace == "" && $RoomType == ""){
+                        $q = mysql_query("select * from room where room_name = '$RoomName'");
+                    }  
+                    elseif($RoomName == "" && $RoomPlace != "" && $RoomType == ""){
+                        $q = mysql_query("select * from room where room_place = '$RoomPlace'");
+                    }
+                    elseif($RoomName == "" && $RoomPlace == "" && $RoomType != ""){
+                        $q = mysql_query("select * from room where room_type = '$RoomType'");
+                    }
+                    elseif($RoomName != "" && $RoomPlace != "" && $RoomType == ""){
+                        $q = mysql_query("select * from room where room_name = '$RoomName' and room_place = '$RoomPlace'");
+                    }
+                    elseif($RoomName != "" && $RoomPlace == "" && $RoomType != ""){
+                        $q = mysql_query("select * from room where room_name = '$RoomName' and 
+                        room_type = '$RoomType'");
+                    }
+                    elseif($RoomName == "" && $RoomPlace != "" && $RoomType != ""){
+                        $q = mysql_query("select * from room where room_place = '$RoomPlace' and 
+                        room_type = '$RoomType'");
+                    }
+                    elseif($RoomName != "" && $RoomPlace != "" && $RoomType != ""){
+                        $q = mysql_query("select * from room where room_name = '$RoomName' and room_place = '$RoomPlace' and 
+                        room_type = '$RoomType'");
+                    }
+                    $n = mysql_num_rows($q);
+                    if($n == 0)
+                    echo "<script type='text/javascript'>alert('sorry no record in this table');</script>";
+                    else{
+                        echo"<div style='overflow-y:auto; height:300px'>";
+                        echo"<table style='border: 2px solid #ddd; border-collapse: collapse; width:100px; height:100px;
+                        margin-left:35%'>";
+                        echo"<tr>";
+                        echo"<th style='border: 2px solid #ddd; padding:5px'>patient_id</th>";
+                        echo"<th style='border: 2px solid #ddd; padding:5px'>patient_name</th>";
+                        echo"<th style='border: 2px solid #ddd; padding:5px'>patient_phone</th>";
+                        echo"<th style='border: 2px solid #ddd; padding:5px'>patient_address</th>";
+                        echo"</tr>";
+                        
+                    
+                        for($i=0;$i<$n;$i++){
+                            $id = mysql_result($q,$i,"room_id");
+                            $name = mysql_result($q,$i,"room_name");
+                            $place = mysql_result($q,$i,"room_place");
+                            $type = mysql_result($q,$i,"room_type");
+                            echo"<tr> <td style='border: 2px solid #ddd; padding:10px'>$id</td> <td style='border: 2px solid #ddd; padding:10px'>$name</td> <td style='border: 2px solid #ddd; padding:10px'>$place</td> <td style='border: 2px solid #ddd; padding:10px'>$type</td> </tr>";
+                        }
+                        
+                        echo"</table>";
+                        echo"</div>";
+                    }
+                
+                    mysql_close($con);
+                }
+            }
+            function CheckRepeat($RoomName,$RoomPlace,$RoomType){
+                @$con = mysql_connect("localhost","root","")or die("error in connect to server");
+                $db = mysql_select_db("project")or die("error to connect to database");
+                $q = mysql_query("select * from room where room_name = '$RoomName' and 
+                    room_place = '$RoomPlace' and room_type = '$RoomType'");
+                $n = mysql_num_rows($q);
+                if($n == 0)
+                    return true;
+                else
+                    return false;
+            }
+        function GetId($RoomName,$RoomPlace,$RoomType){
+                $q = mysql_query("select room_id from room where room_name = '$RoomName' and 
+                room_place = '$RoomPlace' and room_type = '$RoomType'");
+                $id = mysql_result($q,0,"room_id");
+                return $id;
+            }
+        ?>
+
+    </head>
+    <body>
+
+        <div>
+        
+        
+        <!-- ==================== brand ====================  -->
+        <div class="header-brand">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-md-7">
+                    <a class="navbar-brand" href="index.php">
+                        <img src="favicon2.png" width="100px" class="wow zoomInDown"/>
+                        <span class="wow fadeInDownBig">Healthy Care</span>
+                    </a>
+                </div>
+                            
+
+                <div class="col-md-2 d-flex align-items-center wow bounceInRight">
+                    <div class="phone">
+                        
+                        <!-- icon -->
+                        <span class="icon"><i class="fa fa-phone fa-2x" aria-hidden="true"></i></span>
+                        <!-- desc -->
+                        <span class="desc">
+                        <a href="#">111-222-333</a><br><a href="#">19-222-333</a>
+                        </span>
+                        
+                    </div>
+                </div>
+                
+                <div class="col-md-3 d-flex align-items-center wow bounceInRight" data-wow-delay=".4s">
+                    <div class="phone">
+                        
+                        <!-- icon -->
+                        <span class="icon"><i class="fa fa-map-marker fa-2x" aria-hidden="true"></i></span>
+                        <!-- desc -->
+                        <span class="desc">
+                            <a href="#">35 Salah-Salem Street,</a><br> <a href="#">Tower Building 6rd floor</a>     
+                        </span>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        </div>
+        <!-- ==================== brand ====================  -->
+
+        
+        
+        <!-- ==================== Start Navbar ====================  -->
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <div class="row">
+                
+                
+                    <!-- Dropdown -->
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+
+                    <!-- Navigation -->
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+
+
+                        <li class="nav-item active">
+                            <a class="nav-link" href="index.php">Home<span class="sr-only">(current)</span></a>
+                        </li>
+
+                        
+                        <li class="nav-item">
+                        <a class="nav-link" href="doctors.html">Doctors</a>
+                        </li>
+                        
+                        
+                        <li class="nav-item">
+                        <a class="nav-link" href="services.html">Services</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="departments.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Departments
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="Surgery-department.html">Surgery Department</a>
+                          <a class="dropdown-item" href="orthopedic-department.html">Orthopedic Department</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="dental-department.html">Dental Department</a>
+                        </div>
+                        </li>
+                          
+                        <li class="nav-item">
+                        <a class="nav-link" href="appointments.html">Appointment</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                        <a class="nav-link" href="contact.php">Contact</a>
+                        </li>
+                  
+                    </ul>
+                  </div>
+                    
+                </div>
+                                
+            </div>
+        </nav>
+        <!-- ==================== End Navbar ====================  -->
+
+        
+
+        
+        <!-- ==================== start form-info ====================  -->        
+        <div class="form-info">
+            <div class="container">
+                    
+                <form class="col" action="f-rooms.php" method="post">
+                    
+
+                    <!-- search -->
+                    <div class="form-row  justify-content-md-end">
+                        <div class="form-group">
+                            
+                            <div class="search-box">
+                               <a href="#" class="col d-inline">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                               </a>
+                               <input type="text" name="" class="search-txt col" placeholder="Search  . . ."/>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    <div class="form-row">
+                        <div class="form-group col">
+                          <label>Room Name</label>
+                          <input type="text" class="form-control" id="" placeholder="Room name" name="Room_Name">
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="form-row">
+                        <div class="form-group col">
+                          <label>Room Place</label>
+                          <input type="text" class="form-control" id="" placeholder="Room place" name="Room_Place">
+                        </div>
+                    </div>
+
+                    
+                    
+                    <div class="form-row">
+                        <div class="form-group col">
+                          <label>Room Type</label>
+                          <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon" name="Room_Type">
+                            <option selected value="">Choose ...</option>
+                            <option value="Low">Low</option>
+                            <option value="Special">Special</option>
+                          </select>
+                        </div>
+                    </div>
+                    
+                    
+       
+                    
+                    
+                    <div class="form-row justify-content-md-center">
+                        <div class="form-group col-2">
+                            <button type="submit" class="btn btn-primary btn-lg" name="RoomSelect">Select</button>
+                        </div>
+                        <div class="form-group col-2">
+                            <button type="submit" class="btn btn-dark btn-lg" name="RoomShow">Show</button>
+                        </div>
+                        <div class="form-group col-2">
+                            <button type="submit" class="btn btn-success btn-lg" name="RoomSend">Insert</button>
+                        </div>
+                        <div class="form-group col-2">
+                            <button type="submit" class="btn btn-danger btn-lg" name="RoomDelete">Remove</button>
+                        </div>
+                        <div class="form-group col-2">
+                            <button type="submit" class="btn btn-warning btn-lg col" name="RoomUpdate">Update</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-2 offset-9">
+                            <select name="Update" class="custom-select">
+                                <option value="RoomName" selected>RoomName</option><option value="RoomPlace">RoomPlace</option>
+                                <option value="RoomType">RoomType</option>
+                            </select>
+                            <small> use only with update button</small>
+                        </div>
+                    </div>
+                        
+               </form>
+      
+            </div>
+        </div>
+        <?php
+            if(isset($RoomShow)){
+                show();
+            }
+            elseif(isset($RoomSelect)){
+                select();
+            }
+        ?>
+        <!-- ==================== End form-info ====================  -->
+        
+        
+        
+            
+        
+            
+        <!-- ======================================== iframe ========================================  -->
+        <div class="container">    
+        <!-- i-frame -->
+        <iframe id="inlineFrameExample"
+                title="Inline Frame Example"
+                width="100%"
+                height="1157px"
+                src="rel-rooms.php">
+        </iframe>
+        <!-- i-frame -->
+        </div>
+        <!-- ======================================== iframe ========================================  -->
+            
+            
+                        
+            
+            
+            
+            
+            
+            
+        
+        <!-- ==================== start team-show ====================  -->
+        <div class="team-show">    
+            <div class="container-fluid wow fadeInUp" data-wow-duration="1.5s" data-wow-offset="250">
+                <div class="row">
+
+                    <img src="images/home/team2.png"/>
+
+                </div>
+            </div>
+        </div>
+        <!-- ==================== End team-show ====================  -->
+        
+        
+        <!-- ==================== start footer ====================  -->
+        <footer>
+            <div class="container-fluid">
+                <div class="row justify-content-between">
+                    
+                    <div class="footer-info col-md-4">
+                        <h2><a class="footer-brand" href="#"><span>Healthy</span><span>Care</span></a></h2>
+                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
+                    </div>
+                    
+                    <div class="footer-contact col-md-3">
+                        <h2>Contact</h2>
+                        <div class="contact-desc">
+                            <i class="fa fa-location-arrow fa-1x" aria-hidden="true"></i>
+                            <span>291 South 21th Street </span> <br>
+                            <i class="fa fa-map-marker fa-1x" aria-hidden="true"></i>
+                            <span>www.healthycare.com</span> <br>
+                            <i class="fa fa-phone fa-1x" aria-hidden="true"></i>
+                            <span>+98 229 2355</span> <br>
+                            <i class="fa fa-envelope fa-1x" aria-hidden="true"></i>
+                             <a href="#">info@healthycare.com</a>  
+                        </div>
+
+                    </div>
+
+                    <div class="footer-form col-md-4">
+                        <h2>Make an Appointment</h2>
+                        <div class="appointment-message">                        
+                            
+                            <form>
+                                <div class="form-row">
+                                    <div class="form-group col-md-10">
+                                      <input type="text" class="form-control" id="inputfirstname4" placeholder="Name">
+                                    </div>
+                                </div>
+
+                                <div class="form-row ">
+                                    <div class="form-group col-md-10">
+                                        <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-10">
+                                        <textarea class="form-control" id="Textarea4" rows="4" cols="60" placeholder="Message"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-10">
+                                        <button type="button" class="btn btn-outline-success">Send Message</button>
+                                    </div>
+                                </div>
+                           </form>
+                            
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </footer>
+        <!-- ==================== End footer ====================  -->
+
+        
+        
+        
+        <!-- ==================== start copyright ====================  -->
+        <div class="copyright">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-8 col-sm-12">
+                        <h5>Copyright &copy; 2019 All rights reserved </h5>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12">
+                        <a class="youtube" href="www.youtube.com">
+                        <i class="fa fa-youtube-play fa-2x" aria-hidden="true"></i>
+                        </a>
+                        <a class="facebook" href="www.facebook.com">
+                        <i class="fa fa-facebook fa-2x" aria-hidden="true"></i>
+                        </a>
+                        <a class="twitter" href="www.twitter.com">
+                        <i class="fa fa-twitter fa-2x" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ==================== End copyright ====================  -->
+
+        </div>
+
+        
+        
+        
+        <script src="js/jquery-3.4.0.min.js"></script>
+        <script src="js/popper.min.js"></script> <!-- Dropdowns for displaying and positioning -->
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/wow.min.js"></script>
+        <script>new WOW().init();</script>
+
+    </body>
+</html>
